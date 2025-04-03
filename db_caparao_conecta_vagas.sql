@@ -22,25 +22,26 @@
 DROP TABLE IF EXISTS `vagas`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `vagas` (
-  `id_vagas` int NOT NULL,
-  `titulo_vaga` varchar(255) NOT NULL,
-  `descricao` varchar(255) NOT NULL,
-  `salario` decimal(9,2) NOT NULL,
-  `status` varchar(255) DEFAULT NULL,
-  `data_criacao` date NOT NULL,
-  `data_fechamento` date NOT NULL,
-  `qtd_vaga` int NOT NULL,
-  `requisitos` varchar(255) DEFAULT NULL,
-  `imagem` varchar(255) DEFAULT NULL,
-  `qtd_vagas_preenchidas` int DEFAULT NULL,
-  `modalidade_da_vaga` varchar(255) NOT NULL,
-  `termo_de_prazo` tinyint NOT NULL,
-  `id_empresas` int NOT NULL,
+CREATE TABLE IF NOT EXISTS `db_caparao_conecta`.`vagas` (
+  `id_vagas` INT NOT NULL AUTO_INCREMENT,
+  `titulo_vaga` VARCHAR(255) NOT NULL,
+  `descricao` VARCHAR(255) NULL,
+  `salario` DECIMAL(9,2) NOT NULL,
+  `status` VARCHAR(255) NULL,
+  `data_criacao` DATE NOT NULL,
+  `data_fechamento` DATE NOT NULL,
+  `qtd_vaga` INT NOT NULL,
+  `qtd_vagas_preenchidas` INT NULL,
+  `modalidade_da_vaga` VARCHAR(255) NOT NULL,
+  `id_empresas` INT NOT NULL,
   PRIMARY KEY (`id_vagas`),
-  KEY `fk_vagas_empresa1_idx` (`id_empresas`),
-  CONSTRAINT `fk_vagas_empresa1` FOREIGN KEY (`id_empresas`) REFERENCES `empresas` (`id_pessoas`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  INDEX `fk_vagas_empresa1_idx` (`id_empresas` ASC) VISIBLE,
+  CONSTRAINT `fk_vagas_empresa1`
+    FOREIGN KEY (`id_empresas`)
+    REFERENCES `db_caparao_conecta`.`empresas` (`id_pessoas`)
+    ON DELETE cascade
+    ON UPDATE cascade)
+ENGINE = InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

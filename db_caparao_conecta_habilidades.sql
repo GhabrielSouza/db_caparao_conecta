@@ -22,12 +22,12 @@
 DROP TABLE IF EXISTS `habilidades`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `habilidades` (
-  `id_habilidades` int NOT NULL,
-  `nome` varchar(255) NOT NULL,
-  `status` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id_habilidades`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+CREATE TABLE IF NOT EXISTS `db_caparao_conecta`.`habilidades` (
+  `id_habilidades` INT NOT NULL,
+  `nome` VARCHAR(255) NOT NULL,
+  `status` VARCHAR(45) NULL,
+  PRIMARY KEY (`id_habilidades`))
+ENGINE = InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

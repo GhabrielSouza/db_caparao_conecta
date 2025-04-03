@@ -22,14 +22,14 @@
 DROP TABLE IF EXISTS `pessoas`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `pessoas` (
-  `id_pessoas` int NOT NULL AUTO_INCREMENT,
-  `nome` varchar(255) NOT NULL,
-  `telefone` varchar(11) DEFAULT NULL,
-  `sobre` text,
-  `imagem` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id_pessoas`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+CREATE TABLE IF NOT EXISTS `db_caparao_conecta`.`pessoas` (
+  `id_pessoas` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(255) NOT NULL,
+  `telefone` VARCHAR(11) NOT NULL,
+  `sobre` TEXT NULL,
+  `imagem` VARCHAR(255) NULL,
+  PRIMARY KEY (`id_pessoas`))
+ENGINE = InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

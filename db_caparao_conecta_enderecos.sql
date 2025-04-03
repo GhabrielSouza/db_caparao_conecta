@@ -22,21 +22,28 @@
 DROP TABLE IF EXISTS `enderecos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `enderecos` (
-  `id_enderecos` int NOT NULL,
-  `nome_estado` varchar(50) NOT NULL,
-  `cep` varchar(10) DEFAULT NULL,
-  `id_cidades` int NOT NULL,
-  `bairro` varchar(255) NOT NULL,
-  `endereco` varchar(255) NOT NULL,
-  `id_pessoas` int NOT NULL,
-  `estado` varchar(255) NOT NULL,
+CREATE TABLE IF NOT EXISTS `db_caparao_conecta`.`enderecos` (
+  `id_enderecos` INT NOT NULL AUTO_INCREMENT,
+  `cep` VARCHAR(10) NOT NULL,
+  `id_cidades` INT NOT NULL,
+  `bairro` VARCHAR(255) NULL,
+  `endereco` VARCHAR(255) NULL,
+  `id_pessoas` INT NOT NULL,
+  `estado` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id_enderecos`),
-  KEY `fk_Endereco_Cidade1_idx` (`id_cidades`),
-  KEY `fk_endereco_pessoa1_idx` (`id_pessoas`),
-  CONSTRAINT `fk_Endereco_Cidade` FOREIGN KEY (`id_cidades`) REFERENCES `cidades` (`id_cidades`),
-  CONSTRAINT `fk_endereco_pessoa1` FOREIGN KEY (`id_pessoas`) REFERENCES `pessoas` (`id_pessoas`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  INDEX `fk_Endereco_Cidade1_idx` (`id_cidades` ASC) VISIBLE,
+  INDEX `fk_endereco_pessoa1_idx` (`id_pessoas` ASC) VISIBLE,
+  CONSTRAINT `fk_Endereco_Cidade`
+    FOREIGN KEY (`id_cidades`)
+    REFERENCES `db_caparao_conecta`.`cidades` (`id_cidades`)
+    ON DELETE cascade
+    ON UPDATE cascade,
+  CONSTRAINT `fk_endereco_pessoa1`
+    FOREIGN KEY (`id_pessoas`)
+    REFERENCES `db_caparao_conecta`.`pessoas` (`id_pessoas`)
+    ON DELETE cascade
+    ON UPDATE cascade)
+ENGINE = InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

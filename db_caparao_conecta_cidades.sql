@@ -22,14 +22,18 @@
 DROP TABLE IF EXISTS `cidades`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `cidades` (
-  `id_cidades` int NOT NULL,
-  `nome_cidade` varchar(50) NOT NULL,
-  `id_pais` int NOT NULL,
+CREATE TABLE IF NOT EXISTS `db_caparao_conecta`.`cidades` (
+  `id_cidades` INT NOT NULL AUTO_INCREMENT,
+  `nome_cidade` VARCHAR(50) NOT NULL,
+  `id_pais` INT NOT NULL,
   PRIMARY KEY (`id_cidades`),
-  KEY `fk_Cidade_Pais1_idx` (`id_pais`),
-  CONSTRAINT `fk_Cidade_Pais` FOREIGN KEY (`id_pais`) REFERENCES `pais` (`id_pais`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  INDEX `fk_Cidade_Pais1_idx` (`id_pais` ASC) VISIBLE,
+  CONSTRAINT `fk_Cidade_Pais`
+    FOREIGN KEY (`id_pais`)
+    REFERENCES `db_caparao_conecta`.`pais` (`id_pais`)
+    ON DELETE cascade
+    ON UPDATE cascade)
+ENGINE = InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

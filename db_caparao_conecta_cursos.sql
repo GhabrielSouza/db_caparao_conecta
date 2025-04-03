@@ -22,16 +22,16 @@
 DROP TABLE IF EXISTS `cursos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `cursos` (
-  `id_cursos` int NOT NULL,
-  `curso` varchar(255) NOT NULL,
-  `organizacao_emissora` varchar(255) NOT NULL,
-  `cargo_horaria` varchar(50) NOT NULL,
-  `certificado_curso` tinyint NOT NULL,
-  `data_conclusao` date NOT NULL,
-  `tipo_de_curso` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id_cursos`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+CREATE TABLE IF NOT EXISTS `db_caparao_conecta`.`cursos` (
+  `id_cursos` INT NOT NULL AUTO_INCREMENT,
+  `curso` VARCHAR(255) NOT NULL,
+  `organizacao_emissora` VARCHAR(255) NOT NULL,
+  `cargo_horaria` VARCHAR(50) NOT NULL,
+  `certificado_curso` TINYINT NOT NULL,
+  `data_conclusao` DATE NOT NULL,
+  `tipo_de_curso` VARCHAR(255) NULL,
+  PRIMARY KEY (`id_cursos`))
+ENGINE = InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

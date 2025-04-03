@@ -22,17 +22,21 @@
 DROP TABLE IF EXISTS `redesSociais`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `redesSociais` (
-  `intagram` varchar(255) DEFAULT NULL,
-  `github` varchar(255) DEFAULT NULL,
-  `linkedin` varchar(255) DEFAULT NULL,
-  `curriculo_lattes` varchar(255) DEFAULT NULL,
-  `id_redeSociais` int NOT NULL,
-  `id_pessoas` int NOT NULL,
-  PRIMARY KEY (`id_redeSociais`,`id_pessoas`),
-  KEY `fk_redesSociais_pessoa1_idx` (`id_pessoas`),
-  CONSTRAINT `fk_redesSociais_pessoa1` FOREIGN KEY (`id_pessoas`) REFERENCES `pessoas` (`id_pessoas`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+CREATE TABLE IF NOT EXISTS `db_caparao_conecta`.`redesSociais` (
+  `intagram` VARCHAR(255) NULL,
+  `github` VARCHAR(255) NULL,
+  `linkedin` VARCHAR(255) NULL,
+  `curriculo_lattes` VARCHAR(255) NULL,
+  `id_redeSociais` INT NOT NULL AUTO_INCREMENT,
+  `id_pessoas` INT NOT NULL,
+  PRIMARY KEY (`id_redeSociais`, `id_pessoas`),
+  INDEX `fk_redesSociais_pessoa1_idx` (`id_pessoas` ASC) VISIBLE,
+  CONSTRAINT `fk_redesSociais_pessoa1`
+    FOREIGN KEY (`id_pessoas`)
+    REFERENCES `db_caparao_conecta`.`pessoas` (`id_pessoas`)
+    ON DELETE cascade
+    ON UPDATE cascade)
+ENGINE = InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

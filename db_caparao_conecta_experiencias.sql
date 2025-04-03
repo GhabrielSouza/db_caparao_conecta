@@ -22,17 +22,21 @@
 DROP TABLE IF EXISTS `experiencias`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `experiencias` (
-  `id_experiencias` int NOT NULL,
-  `cargo` varchar(255) NOT NULL,
-  `nome_empresa` varchar(255) NOT NULL,
-  `comprovacao` tinyint NOT NULL,
-  `descricao` text,
-  `id_pessoasFisicas` int NOT NULL,
+CREATE TABLE IF NOT EXISTS `db_caparao_conecta`.`experiencias` (
+  `id_experiencias` INT NOT NULL AUTO_INCREMENT,
+  `cargo` VARCHAR(255) NOT NULL,
+  `nome_empresa` VARCHAR(255) NOT NULL,
+  `comprovacao` TINYINT NOT NULL,
+  `descricao` TEXT NULL,
+  `id_pessoasFisicas` INT NOT NULL,
   PRIMARY KEY (`id_experiencias`),
-  KEY `fk_Experiencias_Candidato1_idx` (`id_pessoasFisicas`),
-  CONSTRAINT `fk_Experiencias_Candidato` FOREIGN KEY (`id_pessoasFisicas`) REFERENCES `pessoasFisicas` (`id_pessoas`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  INDEX `fk_Experiencias_Candidato1_idx` (`id_pessoasFisicas` ASC) VISIBLE,
+  CONSTRAINT `fk_Experiencias_Candidato`
+    FOREIGN KEY (`id_pessoasFisicas`)
+    REFERENCES `db_caparao_conecta`.`pessoasFisicas` (`id_pessoas`)
+    ON DELETE cascade
+    ON UPDATE cascade)
+ENGINE = InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

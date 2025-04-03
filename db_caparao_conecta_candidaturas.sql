@@ -22,16 +22,24 @@
 DROP TABLE IF EXISTS `candidaturas`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `candidaturas` (
-  `id_vagas` int NOT NULL,
-  `id_pessoasFisicas` int NOT NULL,
-  `data_candidatura` date NOT NULL,
-  PRIMARY KEY (`id_vagas`,`id_pessoasFisicas`),
-  KEY `fk_vagas_has_candidato_candidato1_idx` (`id_pessoasFisicas`),
-  KEY `fk_vagas_has_candidato_vagas1_idx` (`id_vagas`),
-  CONSTRAINT `fk_candidato_vaga` FOREIGN KEY (`id_pessoasFisicas`) REFERENCES `pessoasFisicas` (`id_pessoas`),
-  CONSTRAINT `fk_vagas_candidato` FOREIGN KEY (`id_vagas`) REFERENCES `vagas` (`id_vagas`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+CREATE TABLE IF NOT EXISTS `db_caparao_conecta`.`candidaturas` (
+  `id_vagas` INT NOT NULL,
+  `id_pessoasFisicas` INT NOT NULL,
+  `data_candidatura` DATE NOT NULL,
+  PRIMARY KEY (`id_vagas`, `id_pessoasFisicas`),
+  INDEX `fk_vagas_has_candidato_candidato1_idx` (`id_pessoasFisicas` ASC) VISIBLE,
+  INDEX `fk_vagas_has_candidato_vagas1_idx` (`id_vagas` ASC) VISIBLE,
+  CONSTRAINT `fk_vagas_candidato`
+    FOREIGN KEY (`id_vagas`)
+    REFERENCES `db_caparao_conecta`.`vagas` (`id_vagas`)
+    ON DELETE cascade
+    ON UPDATE cascade,
+  CONSTRAINT `fk_candidato_vaga`
+    FOREIGN KEY (`id_pessoasFisicas`)
+    REFERENCES `db_caparao_conecta`.`pessoasFisicas` (`id_pessoas`)
+    ON DELETE cascade
+    ON UPDATE cascade)
+ENGINE = InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

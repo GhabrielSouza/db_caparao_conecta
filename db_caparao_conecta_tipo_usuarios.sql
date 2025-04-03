@@ -22,11 +22,11 @@
 DROP TABLE IF EXISTS `tipo_usuarios`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `tipo_usuarios` (
-  `id_tipo_usuarios` int NOT NULL,
-  `nome` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id_tipo_usuarios`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+CREATE TABLE IF NOT EXISTS `db_caparao_conecta`.`tipo_usuarios` (
+  `id_tipo_usuarios` INT NOT NULL,
+  `nome` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id_tipo_usuarios`))
+ENGINE = InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

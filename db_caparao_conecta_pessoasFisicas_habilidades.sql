@@ -22,15 +22,23 @@
 DROP TABLE IF EXISTS `pessoasFisicas_habilidades`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `pessoasFisicas_habilidades` (
-  `id_pessoasFisicas` int NOT NULL,
-  `id_habilidades` int NOT NULL,
-  PRIMARY KEY (`id_pessoasFisicas`,`id_habilidades`),
-  KEY `fk_candidato_has_habilidades_habilidades1_idx` (`id_habilidades`),
-  KEY `fk_candidato_has_habilidades_candidato1_idx` (`id_pessoasFisicas`),
-  CONSTRAINT `fk_candidato_has_habilidades_candidato1` FOREIGN KEY (`id_pessoasFisicas`) REFERENCES `pessoasFisicas` (`id_pessoas`),
-  CONSTRAINT `fk_candidato_has_habilidades_habilidades1` FOREIGN KEY (`id_habilidades`) REFERENCES `habilidades` (`id_habilidades`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+CREATE TABLE IF NOT EXISTS `db_caparao_conecta`.`pessoasFisicas_habilidades` (
+  `id_pessoasFisicas` INT NOT NULL,
+  `id_habilidades` INT NOT NULL,
+  PRIMARY KEY (`id_pessoasFisicas`, `id_habilidades`),
+  INDEX `fk_candidato_has_habilidades_habilidades1_idx` (`id_habilidades` ASC) VISIBLE,
+  INDEX `fk_candidato_has_habilidades_candidato1_idx` (`id_pessoasFisicas` ASC) VISIBLE,
+  CONSTRAINT `fk_candidato_has_habilidades_candidato1`
+    FOREIGN KEY (`id_pessoasFisicas`)
+    REFERENCES `db_caparao_conecta`.`pessoasFisicas` (`id_pessoas`)
+    ON DELETE cascade
+    ON UPDATE cascade,
+  CONSTRAINT `fk_candidato_has_habilidades_habilidades1`
+    FOREIGN KEY (`id_habilidades`)
+    REFERENCES `db_caparao_conecta`.`habilidades` (`id_habilidades`)
+    ON DELETE cascade
+    ON UPDATE cascade)
+ENGINE = InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

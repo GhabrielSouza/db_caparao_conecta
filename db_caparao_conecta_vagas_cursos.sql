@@ -22,15 +22,23 @@
 DROP TABLE IF EXISTS `vagas_cursos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `vagas_cursos` (
-  `id_cursos` int NOT NULL,
-  `id_vagas` int NOT NULL,
-  PRIMARY KEY (`id_cursos`,`id_vagas`),
-  KEY `fk_cursos_profissionalizantes_has_vagas_vagas1_idx` (`id_vagas`),
-  KEY `fk_cursos_profissionalizantes_has_vagas_cursos_profissional_idx` (`id_cursos`),
-  CONSTRAINT `fk_cursos_profissionalizantes_has_vagas_cursos_profissionaliz1` FOREIGN KEY (`id_cursos`) REFERENCES `cursos` (`id_cursos`),
-  CONSTRAINT `fk_cursos_profissionalizantes_has_vagas_vagas1` FOREIGN KEY (`id_vagas`) REFERENCES `vagas` (`id_vagas`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+CREATE TABLE IF NOT EXISTS `db_caparao_conecta`.`vagas_cursos` (
+  `id_cursos` INT NOT NULL,
+  `id_vagas` INT NOT NULL,
+  PRIMARY KEY (`id_cursos`, `id_vagas`),
+  INDEX `fk_cursos_profissionalizantes_has_vagas_vagas1_idx` (`id_vagas` ASC) VISIBLE,
+  INDEX `fk_cursos_profissionalizantes_has_vagas_cursos_profissional_idx` (`id_cursos` ASC) VISIBLE,
+  CONSTRAINT `fk_cursos_profissionalizantes_has_vagas_cursos_profissionaliz1`
+    FOREIGN KEY (`id_cursos`)
+    REFERENCES `db_caparao_conecta`.`cursos` (`id_cursos`)
+    ON DELETE cascade
+    ON UPDATE cascade,
+  CONSTRAINT `fk_cursos_profissionalizantes_has_vagas_vagas1`
+    FOREIGN KEY (`id_vagas`)
+    REFERENCES `db_caparao_conecta`.`vagas` (`id_vagas`)
+    ON DELETE cascade
+    ON UPDATE cascade)
+ENGINE = InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

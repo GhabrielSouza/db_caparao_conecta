@@ -22,14 +22,18 @@
 DROP TABLE IF EXISTS `empresas`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `empresas` (
-  `cnpj` varchar(14) NOT NULL,
-  `id_pessoas` int NOT NULL,
+CREATE TABLE IF NOT EXISTS `db_caparao_conecta`.`empresas` (
+  `cnpj` VARCHAR(14) NOT NULL,
+  `id_pessoas` INT NOT NULL,
   PRIMARY KEY (`id_pessoas`),
-  UNIQUE KEY `cnpj_UNIQUE` (`cnpj`),
-  KEY `fk_empresa_pessoa1_idx` (`id_pessoas`),
-  CONSTRAINT `fk_empresa_pessoa1` FOREIGN KEY (`id_pessoas`) REFERENCES `pessoas` (`id_pessoas`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  UNIQUE INDEX `cnpj_UNIQUE` (`cnpj` ASC) VISIBLE,
+  INDEX `fk_empresa_pessoa1_idx` (`id_pessoas` ASC) VISIBLE,
+  CONSTRAINT `fk_empresa_pessoa1`
+    FOREIGN KEY (`id_pessoas`)
+    REFERENCES `db_caparao_conecta`.`pessoas` (`id_pessoas`)
+    ON DELETE cascade
+    ON UPDATE cascade)
+ENGINE = InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

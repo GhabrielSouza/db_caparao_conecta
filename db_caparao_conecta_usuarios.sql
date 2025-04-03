@@ -22,16 +22,24 @@
 DROP TABLE IF EXISTS `usuarios`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `usuarios` (
-  `email` varchar(255) NOT NULL,
-  `senha` varchar(512) NOT NULL,
-  `id_tipo_usuarios` int NOT NULL,
-  `id_pessoas` int NOT NULL,
+CREATE TABLE IF NOT EXISTS `db_caparao_conecta`.`usuarios` (
+  `email` VARCHAR(255) NOT NULL,
+  `senha` VARCHAR(512) NOT NULL,
+  `id_tipo_usuarios` INT NOT NULL,
+  `id_pessoas` INT NOT NULL,
+  INDEX `fk_usuario_tipo_usuario1_idx` (`id_tipo_usuarios` ASC) VISIBLE,
   PRIMARY KEY (`id_pessoas`),
-  KEY `fk_usuario_tipo_usuario1_idx` (`id_tipo_usuarios`),
-  CONSTRAINT `fk_usuario_pessoa1` FOREIGN KEY (`id_pessoas`) REFERENCES `pessoas` (`id_pessoas`),
-  CONSTRAINT `fk_usuario_tipo_usuario1` FOREIGN KEY (`id_tipo_usuarios`) REFERENCES `tipo_usuarios` (`id_tipo_usuarios`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  CONSTRAINT `fk_usuario_tipo_usuario1`
+    FOREIGN KEY (`id_tipo_usuarios`)
+    REFERENCES `db_caparao_conecta`.`tipo_usuarios` (`id_tipo_usuarios`)
+    ON DELETE cascade
+    ON UPDATE cascade,
+  CONSTRAINT `fk_usuario_pessoa1`
+    FOREIGN KEY (`id_pessoas`)
+    REFERENCES `db_caparao_conecta`.`pessoas` (`id_pessoas`)
+    ON DELETE cascade
+    ON UPDATE cascade)
+ENGINE = InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

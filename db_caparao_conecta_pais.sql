@@ -22,11 +22,11 @@
 DROP TABLE IF EXISTS `pais`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `pais` (
-  `id_pais` int NOT NULL,
-  `nome_pais` varchar(50) NOT NULL,
-  PRIMARY KEY (`id_pais`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+CREATE TABLE IF NOT EXISTS `db_caparao_conecta`.`pais` (
+  `id_pais` INT NOT NULL AUTO_INCREMENT,
+  `nome_pais` VARCHAR(50) NOT NULL,
+  PRIMARY KEY (`id_pais`))
+ENGINE = InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

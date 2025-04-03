@@ -22,22 +22,30 @@
 DROP TABLE IF EXISTS `formacoes_academicas`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `formacoes_academicas` (
-  `id_formacoes_academicas` int NOT NULL,
-  `escolaridade` varchar(255) NOT NULL,
-  `area_de_estudo` varchar(255) DEFAULT NULL,
-  `diploma_formacao` tinyint NOT NULL,
-  `conclusao_formacao` tinyint NOT NULL,
-  `data_emissao` date NOT NULL,
-  `data_conclusao` date NOT NULL,
-  `id_pessoasFisicas` int NOT NULL,
-  `id_instituicoes` int NOT NULL,
+CREATE TABLE IF NOT EXISTS `db_caparao_conecta`.`formacoes_academicas` (
+  `id_formacoes_academicas` INT NOT NULL AUTO_INCREMENT,
+  `escolaridade` VARCHAR(255) NOT NULL,
+  `area_de_estudo` VARCHAR(255) NULL,
+  `diploma_formacao` TINYINT NOT NULL,
+  `conclusao_formacao` TINYINT NOT NULL,
+  `data_emissao` DATE NOT NULL,
+  `data_conclusao` DATE NOT NULL,
+  `id_pessoasFisicas` INT NOT NULL,
+  `id_instituicoes` INT NOT NULL,
   PRIMARY KEY (`id_formacoes_academicas`),
-  KEY `fk_Formacao_academica_Candidato1_idx` (`id_pessoasFisicas`),
-  KEY `fk_formacao_academica_instituicao1_idx` (`id_instituicoes`),
-  CONSTRAINT `fk_Formacao_academica_Candidato1` FOREIGN KEY (`id_pessoasFisicas`) REFERENCES `pessoasFisicas` (`id_pessoas`),
-  CONSTRAINT `fk_formacao_academica_instituicao1` FOREIGN KEY (`id_instituicoes`) REFERENCES `instituicoes` (`id_instituicoes`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  INDEX `fk_Formacao_academica_Candidato1_idx` (`id_pessoasFisicas` ASC) VISIBLE,
+  INDEX `fk_formacao_academica_instituicao1_idx` (`id_instituicoes` ASC) VISIBLE,
+  CONSTRAINT `fk_Formacao_academica_Candidato1`
+    FOREIGN KEY (`id_pessoasFisicas`)
+    REFERENCES `db_caparao_conecta`.`pessoasFisicas` (`id_pessoas`)
+    ON DELETE cascade
+    ON UPDATE cascade,
+  CONSTRAINT `fk_formacao_academica_instituicao1`
+    FOREIGN KEY (`id_instituicoes`)
+    REFERENCES `db_caparao_conecta`.`instituicoes` (`id_instituicoes`)
+    ON DELETE cascade
+    ON UPDATE cascade)
+ENGINE = InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
