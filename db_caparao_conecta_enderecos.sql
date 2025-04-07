@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `db_caparao_conecta`.`enderecos` (
   `endereco` VARCHAR(255) NULL,
   `id_pessoas` INT NOT NULL,
   `estado` VARCHAR(255) NOT NULL,
-  PRIMARY KEY (`id_enderecos`),
+  PRIMARY KEY (`id_enderecos`, `id_pessoas`),
   INDEX `fk_Endereco_Cidade1_idx` (`id_cidades` ASC) VISIBLE,
   INDEX `fk_endereco_pessoa1_idx` (`id_pessoas` ASC) VISIBLE,
   CONSTRAINT `fk_Endereco_Cidade`
@@ -44,7 +44,6 @@ CREATE TABLE IF NOT EXISTS `db_caparao_conecta`.`enderecos` (
     ON DELETE cascade
     ON UPDATE cascade)
 ENGINE = InnoDB DEFAULT CHARSET=utf8mb3;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `enderecos`
